@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Abhay ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+h2 {
+    color: #ff1744;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 22px;
+    border-radius: 25px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.yes {
+    background: #ff1744;
+    color: white;
+}
+
+.no {
+    background: #ccc;
+}
+
+.fade-in {
+    animation: fadeIn 20s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+.success {
+    font-size: 22px;
+    color: #ff1744;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+    <h2 id="question">Do you believe in destiny? ✨</h2>
+    <button class="yes" onclick="nextQuestion()">Yes</button>
+    <button class="no" id="noBtn" onclick="hideNo()">No</button>
+
+    <br><br>
+    <button onclick="startMusic()">▶ Play Music</button>
+</div>
+
+<audio id="music" loop muted>
+    <source src="sitaare.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const questions = [
+    "Do you smile when you think of me? 😊",
+    "Do you feel happy when we talk? 💬",
+    "Do you enjoy spending time with me? 💖",
+    "Do you believe we have something special? ✨",
+    "Will you be my Valentine? 🌹"
+];
+
+let index = 0;
+const card = document.getElementById("card");
+const question = document.getElementById("question");
+const noBtn = document.getElementById("noBtn");
+const music = document.getElementById("music");
+
+function nextQuestion() {
+    index++;
+    if (index < questions.length) {
+        question.innerText = questions[index];
+        noBtn.style.display = "inline-block";
+    } else {
+        showFinalMessage();
+    }
+}
+
+function hideNo() {
+    noBtn.style.display = "none";
+}
+
+function showFinalMessage() {
+    card.innerHTML = `
+        <div class="success fade-in">
+            ❤️<br><br>
+            I love you munchkin,<br>
+            <strong>Abhay</strong> ✨
+        </div>
+    `;
+    fadeMusicIn();
+}
+
+function startMusic() {
+    music.muted = false;
+    music.play();
+}
+
+function fadeMusicIn() {
+    music.muted = false;
+    music.volume = 0;
+    music.play();
+    let v = 0;
+    const fade = setInterval(() => {
+        if (v < 1) {
+            v += 0.02;
+            music.volume = v;
+        } else {
+            clearInterval(fade);
+        }
+    }, 200);
+}
+</script>
+
+</body>
+</html>
